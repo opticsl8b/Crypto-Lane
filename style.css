@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+}
+
+
+/* FIAT buttons */
+
+.fiatblock {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    border: 1px solid black;
+    width: 50%;
+}
+
+.fiatblock header span {
+    background-color: black;
+    color: white;
+}
+
+.fiatblock .fiat {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+}
+
+.displayblock {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+    border: 1px solid blue;
+}
+
+.coins-price-percentage {
+    width: 50%;
+    border: 1px solid black;
+}
+
+.coins-price-percentage .row {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.coins-price-percentage .row div {
+    margin: 10px;
+}
+
+.coins-tweets-charts {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+coingecko-coin-compare-chart-widget {
+    width: 100%;
+}
