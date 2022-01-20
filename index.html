@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <title>Crypto Assets Tracker</title>
+</head>
+
+<body>
+    <header>
+        <h1>Crypto Asset Tracker</h1>
+        <p>A simple tracking app for cryptocurrency assets</p>
+
+    </header>
+    <div class="fiatblock">
+        <header><span>Display FIAT Options</span>
+        </header>
+
+        <div class="fiat">
+            <button class="AUD">AUD</button>
+            <Button class="USD">USD</Button>
+            <button class="EUR">EUR</button>
+        </div>
+    </div>
+    <div class="displayblock">
+        <div class="coins-price-percentage">
+            <!-- <div class="row">
+                <div class="rank"><span>1.</span></div>
+                <div class="coin"><span>bitcoin</span></div>
+                <div class="price"><span>99999</span></div>
+                <div class="daychange"><span>10%</span></div>
+            </div> -->
+        </div>
+        <div class="coins-tweets-charts">
+            <coingecko-coin-compare-chart-widget coin-ids="bitcoin,ethereum,binancecoin,cardano,solana" currency="usd" locale="en"></coingecko-coin-compare-chart-widget>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://widgets.coingecko.com/coingecko-coin-compare-chart-widget.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
