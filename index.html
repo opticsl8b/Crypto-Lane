@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="skeleton.css">
     <link rel="stylesheet" href="style.css" />
     <title>Crypto Assets Tracker</title>
 </head>
@@ -28,11 +30,32 @@
     </div>
     <div class="displayblock">
         <div class="coins-price-percentage">
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>coins</th>
+                        <th>Price</th>
+                        <th>24H</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+            <!-- <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody> -->
             <!-- <div class="row">
-                <div class="rank"><span>1.</span></div>
-                <div class="coin"><span>bitcoin</span></div>
-                <div class="price"><span>99999</span></div>
-                <div class="daychange"><span>10%</span></div>
+                <div class="rank"><span>#</span></div>
+                <div class="coin"><span>coins</span></div>
+                <div class="price"><span>Price</span></div>
+                <div class="daychange"><span>24H</span></div>
             </div> -->
         </div>
         <div class="coins-tweets-charts">

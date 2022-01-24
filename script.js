@@ -1,77 +1,203 @@
 var coinList = ["bitcoin", "ethereum", "binancecoin", "cardano", "solana"];
 var priceBlock = $(".coins-price-percentage");
-console.log(priceBlock);
-console.log(coinList[0]);
 
-// create coin list
-function createPrice() {
-    // -row structure
-    // <div class="row">
-    //         <div class="rank"><span>1.</span></div>
-    //         <div class="coin"><span>bitcoin</span></div>
-    //         <div class="price"><span>99999</span></div>
-    //         <div class="24hr"><span>10%</span></div>
-    //     </div>
 
-    var row = $("<div>").attr("class", "row");
-    var rankCol = $("<div>").attr("class", "rank");
-    // var rankSpan=$("<span>").text(coins.rank+".")
-    var coinCol = $("<div>").attr("class", "coin");
-    var priceCol = $("<div>").attr("class", "price");
-    var daychangeCol = $("<div>").attr("class", "daychange");
 
-    // create divs
-    priceBlock.append(row);
-    row.append(rankCol);
-    row.append(coinCol);
-    row.append(priceCol);
-    row.append(daychangeCol);
+function initialPage() {
 
-    getcoinPrice()
-}
-
-// Fetch api 
-function getcoinPrice() {
     var priceApi = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Csolana&vs_currencies=usd%2Cbtc%2Caud%2Ceur&include_24hr_change=true"
-    fetch(priceApi)
-        .then(function(response) {
-            if (response.ok) {
-                response.json()
-                    .then(function(data) {
+    var dataString = localStorage.getItem("currency");
 
-                        // data save locally ?
+    if (dataString) {
+        // retrive local storage into a object
+        var data = JSON.parse(dataString);
+        var tbodyEl = document.getElementById("tbody");
+        var rankCreate = $("<td>").attr("class", "rank");
+        var coinCreate = $("<td>").attr("class", "coin");
+        var priceCreate = $("<td>").attr("class", "price");
+        var daychangeCreate = $("<td>").attr("class", "daychange");
 
-                        // target created divs
-                        var rankEl = $(".rank");
-                        var coinEl = $(".coin");
-                        var priceEl = $(".price");
-                        var daychangeEl = $(".daychange");
+        console.log(coinList.length);
 
-                        console.log(data);
-                        console.log(data.cardano.usd);
+        for (i = 0; i < coinList.length; i++) {
+            var
 
-                        // display corresponding data
-                        for (i = 0; i < coinList.length; i++) {
-
-                            // add ranking number
-                            var rankText = $("<span>").text(i + 1 + ".");
-                            rankEl.append(rankText);
-                            // add coins 
-                            var coinText = $("<span>").text(coinList[i]);
-                            coinEl.append(coinText);
-                            // add price
-                            var priceText = $("<span>").text(data[coinList[i]].usd);
-                            priceEl.append(priceText);
-                            // add daily change
-                            var changeText = $("<span>").text(data[coinList[i]].usd_24h_change);
-                            daychangeEl.append(changeText);
-
-                        }
-                    })
-            }
-        })
+        }
+    }
 }
 
+var rowCreate = $("<div>").attr("class", "row");
+var rankCreate = $("<div>").attr("class", "rank");
+var coinCreate = $("<div>").attr("class", "coin");
+var priceCreate = $("<div>").attr("class", "price");
+var daychangeCreate = $("<div>").attr("class", "daychange");
+
+// for (i = 0; i < coinList.length; i++) {
+
+//     priceBlock.append(rowCreate);
+
+//     var rankText = $("<span>").text(i + 1 + ".");
+//     var coinText = $("<span>").text(coinList[i]);
+//     var priceText = $("<span>").text(data[coinList[i]].usd);
+//     var changeText = $("<span>").text(data[coinList[i]].usd_24h_change.toFixed(1));
+
+//     // target corresponding row
+//     var lastRow = $(".row").eq(i + 1)
+
+//     // creat corresponding colume
+//     lastRow.append(rankCreate);
+//     var lastRank = $(".rank").eq(i + 1)
+//     lastRank.append(rankText);
+
+//     lastRow.append(coinCreate);
+//     var lastcoin = $(".coin").eq(i + 1)
+//     lastcoin.append(coinText);
+
+//     lastRow.append(priceCreate);
+//     var lastprice = $(".price").eq(i + 1)
+//     lastprice.append(priceText);
+
+//     lastRow.append(daychangeCreate);
+//     var lastdaychange = $(".daychange").eq(i + 1)
+//     lastdaychange.append(changeText);
+// }
 
 
-createPrice();
+// } else {
+//     fetch(priceApi)
+//         .then(function(response) {
+//                 if (response.ok) {
+//                     response.json().then(function(data) {
+//                             localStorage.setItem("currency", JSON.stringify(data));
+
+
+
+
+
+
+initialPage();
+
+
+// var rankText = $("<span>").text(1 + ".");
+// rowTarget.children(0).append(rankText);
+
+
+
+// 
+//     
+
+//     console.log(rowTarget);
+//     var rankText = $("<span>").text(i + 1 + ".");
+//     var coinText = $("<span>").text(coinList[i]);
+//     var priceText = $("<span>").text(data[coinList[i]].usd);
+//     var changeText = $("<span>").text(data[coinList[i]].usd_24h_change.toFixed(1));
+//     
+//     
+//     
+// rowTarget.append(coinCol);
+// rowTarget.append(priceCol);
+// rowTarget.append(daychangeCol);
+
+// 
+// rowTarget.children(1).append(coinText);
+// rowTarget.children(2).append(priceText);
+// rowTarget.children(3).append(changeText);}
+
+
+
+
+
+
+// // Fetch api 
+// function initialPageeee() {
+//     var priceApi = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Csolana&vs_currencies=usd%2Cbtc%2Caud%2Ceur&include_24hr_change=true"
+
+
+//     if (dataString) {
+//         var data = JSON.parse(dataString);
+//         // target
+//         // coins-price row structure 
+//         var row = $("<div>").attr("class", "row");
+//         var rankCol = $("<div>").attr("class", "rank");
+//         var coinCol = $("<div>").attr("class", "coin");
+//         var priceCol = $("<div>").attr("class", "price");
+//         var daychangeCol = $("<div>").attr("class", "daychange");
+
+//         for (i = 0; i < coinList.length; i++) {
+//             var rowTarget = $(priceBlock).children(i + 1);
+
+//             var rankText = $("<span>").text(i + 1 + ".");
+//             var coinText = $("<span>").text(coinList[i]);
+//             var priceText = $("<span>").text(data[coinList[i]].usd);
+//             var changeText = $("<span>").text(data[coinList[i]].usd_24h_change.toFixed(1));
+
+
+// rowTarget.append(rankCol);
+// rowTarget.append(coinCol);
+// rowTarget.append(priceCol);
+// rowTarget.append(daychangeCol);
+
+// rowTarget.children(0).append(rankText);
+// rowTarget.children(1).append(coinText);
+// rowTarget.children(2).append(priceText);
+// rowTarget.children(3).append(changeText);
+
+//         }
+//     } else {
+//         fetch(priceApi)
+//             .then(function(response) {
+//                     if (response.ok) {
+//                         response.json().then(function(data) {
+
+//                                 localStorage.setItem("currency", JSON.stringify(data));
+
+// for (i = 0; i < coinList.length; i++) {
+//     rowTarget.append(rankCol);
+//     rowTarget.append(coinCol);
+//     rowTarget.append(priceCol);
+//     rowTarget.append(daychangeCol);
+
+//     rowTarget.children(0).append(rankText);
+//     rowTarget.children(1).append(coinText);
+//     rowTarget.children(2).append(priceText);
+//     rowTarget.children(3).append(changeText);
+
+
+
+//                         rowTarget.append(rankCol);
+//                         rowTarget.children(0).append(rankText);
+
+//                         // display corresponding data
+//                         for (i = 0; i < coinList.length; i++) {
+
+
+
+
+
+// // add row block
+// priceBlock.append(row);
+// // add ranking number
+// var rankCol = $("<div>").attr("class", "rank");
+// var rankText = $("<span>").text(i + 1 + ".");
+// row.append(rankCol);
+// rankEl.append(rankText);
+// // add coins 
+// var coinCol = $("<div>").attr("class", "coin");
+// var coinText = $("<span>").text(coinList[i]);
+// row.append(coinCol);
+// coinEl.append(coinText);
+// // add price
+// var priceCol = $("<div>").attr("class", "price");
+// var priceText = $("<span>").text(data[coinList[i]].usd);
+// row.append(priceCol);
+// priceEl.append(priceText);
+// // add daily change
+// var daychangeCol = $("<div>").attr("class", "daychange");
+// var changeText = $("<span>").text(data[coinList[i]].usd_24h_change.toFixed(2));
+// row.append(daychangeCol);
+// daychangeEl.append(changeText);
+
+//     }
+// })
+// }
+// })
