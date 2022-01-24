@@ -10,7 +10,7 @@ fetch(requestUrl)
   })
   .then(function (data) {
     console.log(data);
-
+    //the i sets how many links to show, check console to see if anything else needs to be shown
     for (let i = 0; i < 5; i++) {
       var link = document.createElement("a");
       var linkHeader = document.createElement("h2");
