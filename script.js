@@ -11,17 +11,22 @@ function initialPage() {
     if (dataString) {
         // retrive local storage into a object
         var data = JSON.parse(dataString);
-        var tbodyEl = document.getElementById("tbody");
+        var tbodyEl = $("tbody");
         var rankCreate = $("<td>").attr("class", "rank");
         var coinCreate = $("<td>").attr("class", "coin");
         var priceCreate = $("<td>").attr("class", "price");
         var daychangeCreate = $("<td>").attr("class", "daychange");
 
         console.log(coinList.length);
-
         for (i = 0; i < coinList.length; i++) {
-            var
 
+            var trCreate = $("<tr>")
+            tbodyEl.append(trCreate);
+
+            tbodyEl.children(0).append(rankCreate);
+            tbodyEl.children(0).children(0).text(i + 1 + ".")
+
+            console.log(rankCreate);
         }
     }
 }
