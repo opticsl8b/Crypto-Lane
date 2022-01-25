@@ -104,11 +104,11 @@ next.addEventListener("click", function () {
 });
 
 function setNewsStory() {
-  news.children[2].setAttribute(
+  news.children[3].setAttribute(
     "href",
     newsData.response.results[newsItem].webUrl
   );
-  news.children[2].children[0].innerText =
+  news.children[3].children[0].innerText =
     newsData.response.results[newsItem].webTitle;
 }
 /////////////////////////////////////////
