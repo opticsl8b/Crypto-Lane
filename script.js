@@ -1,19 +1,19 @@
 var coinList = ["bitcoin", "ethereum", "binancecoin", "cardano", "solana"];
-var priceBlock = $(".coins-price-percentage");
 var priceApi = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Csolana&vs_currencies=usd%2Cbtc%2Caud%2Ceur&include_24hr_change=true"
 
+var dataString = localStorage.getItem("currency");
 
 
 function initialPage() {
 
-    var dataString = localStorage.getItem("currency");
+
 
     if (dataString) {
         // retrive local storage into a object
         var data = JSON.parse(dataString);
         var tbodyEl = document.getElementById("tbody");
 
-        console.log(coinList.length);
+        console.log(data);
 
         for (i = 0; i < coinList.length; i++) {
             var trCreate = document.createElement('tr')
@@ -52,7 +52,6 @@ function initialPage() {
             .then(function(data) {
                 localStorage.setItem('currency', JSON.stringify(data));
             })
-
     }
 }
 
@@ -95,17 +94,65 @@ var jqsearchHistory = $(".fiat");
 $(jqsearchHistory).on("click", ".button-primary", function(event) {
 
     var jqButton = $(event.target);
+    var buttonText = jqButton.val()
+
+
 
     console.log(jqButton.text());
-    console.log();
+
+    console.log(jqButton.val());
+
+    if (dataString) {
+
+        // retrive local storage into a object
+        var data = JSON.parse(dataString);
+        var tbodyEl = document.getElementById("tbody");
+
+        if (buttonText == "aud") {
+            console.log("Yes");
+        }
+
+        tbodyEl.innerHTML = "";
 
 
+        for (i = 0; i < coinList.length; i++) {
 
-    fetch(priceApi)
-        .then(response => response.json())
-        .then(function(data) {
-            localStorage.setItem('currency', JSON.stringify(data));
-        })
+            var trCreate = document.createElement('tr')
+            tbodyEl.appendChild(trCreate);
+            var lastTr = tbodyEl.lastElementChild;
+
+            var rankCreate = document.createElement('td');
+            rankCreate.setAttribute('class', 'rank');
+            lastTr.appendChild(rankCreate);
+
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = i + 1 + ".";
+
+            var coinCreate = document.createElement('td');
+            coinCreate.setAttribute('class', 'coin');
+            lastTr.appendChild(coinCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = coinList[i];
+
+            var priceCreate = document.createElement('td');
+            priceCreate.setAttribute('class', 'price');
+            lastTr.appendChild(priceCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]][buttonText];
+
+            var daychangeCreate = document.createElement('td');
+            daychangeCreate.setAttribute('class', 'daychange');
+            lastTr.appendChild(daychangeCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]][buttonText + "_24h_change"].toFixed(1);
+        }
+    }
 
 
 });
+
+// fetch(priceApi)
+//     .then(response => response.json())
+//     .then(function(data) {
+//         localStorage.setItem('currency', JSON.stringify(data));
+//     })
