@@ -10,6 +10,7 @@ var prev = document.getElementById("prev");
 var next = document.getElementById("next");
 var newsItem = 0;
 var newsData;
+
 function initialPage() {
 
 
@@ -61,77 +62,68 @@ function initialPage() {
             })
 
     }
-  } else {
-    fetch(priceApi)
-      .then((response) => response.json())
-      .then(function (data) {
-        localStorage.setItem("currency", JSON.stringify(data));
-      });
-  }
 }
+
 
 initialPage();
 
 function clearStorage() {
-  localStorage.removeItem("currency");
+    localStorage.removeItem("currency");
 }
 
 ///////////////////////////
 // news
 var news = document.getElementById("news");
 var requestUrl =
-  " https://content.guardianapis.com/search?&q=bitcoin&order-by=newest&api-key=f76e5cf8-c1e1-4075-aace-195273e6d616";
+    " https://content.guardianapis.com/search?&q=bitcoin&order-by=newest&api-key=f76e5cf8-c1e1-4075-aace-195273e6d616";
 
 fetch(requestUrl)
-  .then(function (response) {
-    if (response.ok) {
-      return response.json();
+    .then(function(response) {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+    .then(function(data) {
+        console.log(data);
+
+        var link = document.createElement("a");
+        var linkHeader = document.createElement("p");
+        linkHeader.innerText = data.response.results[newsItem].webTitle;
+        link.setAttribute("href", data.response.results[newsItem].webUrl);
+        link.appendChild(linkHeader);
+        news.appendChild(link);
+        newsData = data;
+    });
+
+prev.addEventListener("click", function() {
+    newsItem -= 1;
+    if (newsItem < 0) {
+        newsItem = 9;
     }
-  })
-  .then(function (data) {
-    console.log(data);
-
-    var link = document.createElement("a");
-    var linkHeader = document.createElement("p");
-    linkHeader.innerText = data.response.results[newsItem].webTitle;
-    link.setAttribute("href", data.response.results[newsItem].webUrl);
-    link.appendChild(linkHeader);
-    news.appendChild(link);
-    newsData = data;
-  });
-
-prev.addEventListener("click", function () {
-  newsItem -= 1;
-  if (newsItem < 0) {
-    newsItem = 9;
-  }
-  setNewsStory();
+    setNewsStory();
 });
 
-next.addEventListener("click", function () {
-  newsItem += 1;
+next.addEventListener("click", function() {
+    newsItem += 1;
 
-  if (newsItem > 9) {
-    newsItem = 0;
-  }
-  setNewsStory();
+    if (newsItem > 9) {
+        newsItem = 0;
+    }
+    setNewsStory();
 });
 
 function setNewsStory() {
-  news.children[3].setAttribute(
-    "href",
-    newsData.response.results[newsItem].webUrl
-  );
-  news.children[3].children[0].innerText =
-    newsData.response.results[newsItem].webTitle;
+    news.children[3].setAttribute(
+        "href",
+        newsData.response.results[newsItem].webUrl
+    );
+    news.children[3].children[0].innerText =
+        newsData.response.results[newsItem].webTitle;
 }
 /////////////////////////////////////////
 // Fiat Buttons-
 
 var jqsearchHistory = $(".fiat");
-
-$(jqsearchHistory).on("click", ".button-primary", function (event) {
-  var jqButton = $(event.target);
 
 
 $(jqsearchHistory).on("click", ".button-primary", function(event) {
@@ -193,10 +185,3 @@ $(jqsearchHistory).on("click", ".button-primary", function(event) {
 
 
 });
-
-// fetch(priceApi)
-//     .then(response => response.json())
-//     .then(function(data) {
-//         localStorage.setItem('currency', JSON.stringify(data));
-//     })
-
