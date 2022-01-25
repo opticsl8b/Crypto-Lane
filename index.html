@@ -13,60 +13,56 @@
 </head>
 
 <body>
-    <header>
+    <header class="container">
         <h1>Crypto Asset Tracker</h1>
         <p>A simple tracking app for cryptocurrency assets</p>
-
     </header>
-    <div class="fiatblock">
-        <header><span>Display FIAT Options</span>
-        </header>
 
-        <div class="fiat">
-            <button class="AUD">AUD</button>
-            <Button class="USD">USD</Button>
-            <button class="EUR">EUR</button>
+    <div class="container">
+        <div class="rows">
+            <div class="six columns">
+                <header><span>Display FIAT Options</span></header>
+                <div class="fiat">
+                    <button class="button-primary">AUD</button>
+                    <Button class="button-primary">USD</Button>
+                    <button class="button-primary">EUR</button>
+                </div>
+            </div>
+
+            <div class="six columns" id="news"></div>
         </div>
     </div>
-    <div class="displayblock">
-        <div class="coins-price-percentage">
-            <table class="u-full-width">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>coins</th>
-                        <th>Price</th>
-                        <th>24H</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
+    <div class="container">
+        <div class="rows" id="displayblock">
+            <div class="six columns" id="coins-price-percentage">
+                <table class="u-full-width">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>coins</th>
+                            <th>Price</th>
+                            <th>24H</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
 
-                </tbody>
-            </table>
-            <!-- <tbody>
-                <tr>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-            </tbody> -->
-            <!-- <div class="row">
-                <div class="rank"><span>#</span></div>
-                <div class="coin"><span>coins</span></div>
-                <div class="price"><span>Price</span></div>
-                <div class="daychange"><span>24H</span></div>
-            </div> -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="six columns" id="widget-charts">
+                <coingecko-coin-compare-chart-widget coin-ids="bitcoin,ethereum,binancecoin,cardano,solana" currency="usd" locale="en"></coingecko-coin-compare-chart-widget>
+            </div>
         </div>
-        <div class="coins-tweets-charts">
-            <coingecko-coin-compare-chart-widget coin-ids="bitcoin,ethereum,binancecoin,cardano,solana" currency="usd" locale="en"></coingecko-coin-compare-chart-widget>
-        </div>
+    </div>
+    <div>
+
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://widgets.coingecko.com/coingecko-coin-compare-chart-widget.js"></script>
     <script src="script.js"></script>
+
 </body>
 
 </html>
