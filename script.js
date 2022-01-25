@@ -1,77 +1,111 @@
 var coinList = ["bitcoin", "ethereum", "binancecoin", "cardano", "solana"];
 var priceBlock = $(".coins-price-percentage");
-console.log(priceBlock);
-console.log(coinList[0]);
+var priceApi = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Csolana&vs_currencies=usd%2Cbtc%2Caud%2Ceur&include_24hr_change=true"
 
-// create coin list
-function createPrice() {
-    // -row structure
-    // <div class="row">
-    //         <div class="rank"><span>1.</span></div>
-    //         <div class="coin"><span>bitcoin</span></div>
-    //         <div class="price"><span>99999</span></div>
-    //         <div class="24hr"><span>10%</span></div>
-    //     </div>
 
-    var row = $("<div>").attr("class", "row");
-    var rankCol = $("<div>").attr("class", "rank");
-    // var rankSpan=$("<span>").text(coins.rank+".")
-    var coinCol = $("<div>").attr("class", "coin");
-    var priceCol = $("<div>").attr("class", "price");
-    var daychangeCol = $("<div>").attr("class", "daychange");
 
-    // create divs
-    priceBlock.append(row);
-    row.append(rankCol);
-    row.append(coinCol);
-    row.append(priceCol);
-    row.append(daychangeCol);
+function initialPage() {
 
-    getcoinPrice()
+    var dataString = localStorage.getItem("currency");
+
+    if (dataString) {
+        // retrive local storage into a object
+        var data = JSON.parse(dataString);
+        var tbodyEl = document.getElementById("tbody");
+
+        console.log(coinList.length);
+
+        for (i = 0; i < coinList.length; i++) {
+            var trCreate = document.createElement('tr')
+            tbodyEl.appendChild(trCreate);
+            var lastTr = tbodyEl.lastElementChild;
+
+            var rankCreate = document.createElement('td');
+            rankCreate.setAttribute('class', 'rank');
+            lastTr.appendChild(rankCreate);
+
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = i + 1 + ".";
+
+            var coinCreate = document.createElement('td');
+            coinCreate.setAttribute('class', 'coin');
+            lastTr.appendChild(coinCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = coinList[i];
+
+            var priceCreate = document.createElement('td');
+            priceCreate.setAttribute('class', 'price');
+            lastTr.appendChild(priceCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]].usd.toFixed(1);
+
+            var daychangeCreate = document.createElement('td');
+            daychangeCreate.setAttribute('class', 'daychange');
+            lastTr.appendChild(daychangeCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]].usd_24h_change.toFixed(1);
+        }
+
+    } else {
+        fetch(priceApi)
+            .then(response => response.json())
+            .then(function(data) {
+                localStorage.setItem('currency', JSON.stringify(data));
+            })
+
+    }
 }
 
-// Fetch api 
-function getcoinPrice() {
-    var priceApi = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Csolana&vs_currencies=usd%2Cbtc%2Caud%2Ceur&include_24hr_change=true"
+initialPage();
+
+function clearStorage() {
+    localStorage.removeItem('currency');
+}
+
+// news
+
+var news = document.getElementById("news");
+var requestUrl =
+    " https://content.guardianapis.com/search?&q=bitcoin&order-by=newest&api-key=f76e5cf8-c1e1-4075-aace-195273e6d616";
+
+fetch(requestUrl)
+    .then(function(response) {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+    .then(function(data) {
+        console.log(data);
+        //the i sets how many links to show, check console to see if anything else needs to be shown
+        for (let i = 0; i < 1; i++) {
+            var link = document.createElement("a");
+            var linkHeader = document.createElement("p");
+            linkHeader.innerText = data.response.results[i].webTitle;
+            link.setAttribute("href", data.response.results[i].webUrl);
+            link.appendChild(linkHeader);
+            news.appendChild(link);
+        }
+    });
+
+// Fiat Buttons-
+
+var jqsearchHistory = $(".fiat");
+
+
+$(jqsearchHistory).on("click", ".button-primary", function(event) {
+
+    var jqButton = $(event.target);
+
+    console.log(jqButton.text());
+    console.log();
+
+
+
     fetch(priceApi)
-        .then(function(response) {
-            if (response.ok) {
-                response.json()
-                    .then(function(data) {
-
-                        // data save locally ?
-
-                        // target created divs
-                        var rankEl = $(".rank");
-                        var coinEl = $(".coin");
-                        var priceEl = $(".price");
-                        var daychangeEl = $(".daychange");
-
-                        console.log(data);
-                        console.log(data.cardano.usd);
-
-                        // display corresponding data
-                        for (i = 0; i < coinList.length; i++) {
-
-                            // add ranking number
-                            var rankText = $("<span>").text(i + 1 + ".");
-                            rankEl.append(rankText);
-                            // add coins 
-                            var coinText = $("<span>").text(coinList[i]);
-                            coinEl.append(coinText);
-                            // add price
-                            var priceText = $("<span>").text(data[coinList[i]].usd);
-                            priceEl.append(priceText);
-                            // add daily change
-                            var changeText = $("<span>").text(data[coinList[i]].usd_24h_change);
-                            daychangeEl.append(changeText);
-
-                        }
-                    })
-            }
+        .then(response => response.json())
+        .then(function(data) {
+            localStorage.setItem('currency', JSON.stringify(data));
         })
-}
 
 
-
-createPrice();
+});
