@@ -1,51 +1,65 @@
 var coinList = ["bitcoin", "ethereum", "binancecoin", "cardano", "solana"];
-var priceBlock = $(".coins-price-percentage");
-var priceApi =
-  "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Csolana&vs_currencies=usd%2Cbtc%2Caud%2Ceur&include_24hr_change=true";
+
+var priceApi = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Csolana&vs_currencies=usd%2Cbtc%2Caud%2Ceur&include_24hr_change=true"
+
+var dataString = localStorage.getItem("currency");
+
+
 
 var prev = document.getElementById("prev");
 var next = document.getElementById("next");
 var newsItem = 0;
 var newsData;
 function initialPage() {
-  var dataString = localStorage.getItem("currency");
 
-  if (dataString) {
-    // retrive local storage into a object
-    var data = JSON.parse(dataString);
-    var tbodyEl = document.getElementById("tbody");
 
-    console.log(coinList.length);
 
-    for (i = 0; i < coinList.length; i++) {
-      var trCreate = document.createElement("tr");
-      tbodyEl.appendChild(trCreate);
-      var lastTr = tbodyEl.lastElementChild;
 
-      var rankCreate = document.createElement("td");
-      rankCreate.setAttribute("class", "rank");
-      lastTr.appendChild(rankCreate);
+    if (dataString) {
+        // retrive local storage into a object
+        var data = JSON.parse(dataString);
+        var tbodyEl = document.getElementById("tbody");
 
-      var lastTd = lastTr.lastElementChild;
-      lastTd.innerHTML = i + 1 + ".";
+        console.log(data);
 
-      var coinCreate = document.createElement("td");
-      coinCreate.setAttribute("class", "coin");
-      lastTr.appendChild(coinCreate);
-      var lastTd = lastTr.lastElementChild;
-      lastTd.innerHTML = coinList[i];
+        for (i = 0; i < coinList.length; i++) {
+            var trCreate = document.createElement('tr')
+            tbodyEl.appendChild(trCreate);
+            var lastTr = tbodyEl.lastElementChild;
 
-      var priceCreate = document.createElement("td");
-      priceCreate.setAttribute("class", "price");
-      lastTr.appendChild(priceCreate);
-      var lastTd = lastTr.lastElementChild;
-      lastTd.innerHTML = data[coinList[i]].usd.toFixed(1);
+            var rankCreate = document.createElement('td');
+            rankCreate.setAttribute('class', 'rank');
+            lastTr.appendChild(rankCreate);
 
-      var daychangeCreate = document.createElement("td");
-      daychangeCreate.setAttribute("class", "daychange");
-      lastTr.appendChild(daychangeCreate);
-      var lastTd = lastTr.lastElementChild;
-      lastTd.innerHTML = data[coinList[i]].usd_24h_change.toFixed(1);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = i + 1 + ".";
+
+            var coinCreate = document.createElement('td');
+            coinCreate.setAttribute('class', 'coin');
+            lastTr.appendChild(coinCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = coinList[i];
+
+            var priceCreate = document.createElement('td');
+            priceCreate.setAttribute('class', 'price');
+            lastTr.appendChild(priceCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]].usd.toFixed(1);
+
+            var daychangeCreate = document.createElement('td');
+            daychangeCreate.setAttribute('class', 'daychange');
+            lastTr.appendChild(daychangeCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]].usd_24h_change.toFixed(1);
+        }
+
+    } else {
+        fetch(priceApi)
+            .then(response => response.json())
+            .then(function(data) {
+                localStorage.setItem('currency', JSON.stringify(data));
+            })
+
     }
   } else {
     fetch(priceApi)
@@ -119,12 +133,70 @@ var jqsearchHistory = $(".fiat");
 $(jqsearchHistory).on("click", ".button-primary", function (event) {
   var jqButton = $(event.target);
 
-  console.log(jqButton.text());
-  console.log();
 
-  fetch(priceApi)
-    .then((response) => response.json())
-    .then(function (data) {
-      localStorage.setItem("currency", JSON.stringify(data));
-    });
+$(jqsearchHistory).on("click", ".button-primary", function(event) {
+
+    var jqButton = $(event.target);
+    var buttonText = jqButton.val()
+
+
+
+    console.log(jqButton.text());
+
+    console.log(jqButton.val());
+
+    if (dataString) {
+
+        // retrive local storage into a object
+        var data = JSON.parse(dataString);
+        var tbodyEl = document.getElementById("tbody");
+
+        if (buttonText == "aud") {
+            console.log("Yes");
+        }
+
+        tbodyEl.innerHTML = "";
+
+
+        for (i = 0; i < coinList.length; i++) {
+
+            var trCreate = document.createElement('tr')
+            tbodyEl.appendChild(trCreate);
+            var lastTr = tbodyEl.lastElementChild;
+
+            var rankCreate = document.createElement('td');
+            rankCreate.setAttribute('class', 'rank');
+            lastTr.appendChild(rankCreate);
+
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = i + 1 + ".";
+
+            var coinCreate = document.createElement('td');
+            coinCreate.setAttribute('class', 'coin');
+            lastTr.appendChild(coinCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = coinList[i];
+
+            var priceCreate = document.createElement('td');
+            priceCreate.setAttribute('class', 'price');
+            lastTr.appendChild(priceCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]][buttonText];
+
+            var daychangeCreate = document.createElement('td');
+            daychangeCreate.setAttribute('class', 'daychange');
+            lastTr.appendChild(daychangeCreate);
+            var lastTd = lastTr.lastElementChild;
+            lastTd.innerHTML = data[coinList[i]][buttonText + "_24h_change"].toFixed(1);
+        }
+    }
+
+
 });
+
+// fetch(priceApi)
+//     .then(response => response.json())
+//     .then(function(data) {
+//         localStorage.setItem('currency', JSON.stringify(data));
+//     })
+
