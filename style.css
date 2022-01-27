@@ -2,68 +2,180 @@
     box-sizing: border-box;
     font-family: 'Press Start 2P', 'cursive';
     font-size: 16px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+
+/* body */
+
+body {
+    background-color: rgb(233, 233, 233);
+}
+
+.six {
+    background-color: white;
+    margin-top: 20px;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* header */
+
+body>header {
+    background-color: white;
+    margin: 10px 0;
+    text-align: left;
+}
+
+header span {
+    margin-left: 8px;
+}
+
+.fa-bitcoin {
+    font-size: 30px;
+    margin: 0 15px;
+}
+
+header h1 {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+header p {
+    padding: 0 20px;
 }
 
 
 /* FIAT buttons */
 
-.fiatblock {
+#marketcap-fiat {
+    background-color: rgb(233, 233, 233);
+}
+
+.marketcap,
+.btn {
+    margin-bottom: 20px;
+    background-color: white;
+    padding-bottom: 15px
+}
+
+.six header {
+    margin-top: 15px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
+    flex-direction: column;
     align-items: center;
-    border: 1px solid black;
-    width: 50%;
+    flex-wrap: wrap;
+    padding-left: 2%;
 }
 
-.fiatblock header span {
-    background-color: black;
-    color: white;
+.fas {
+    font-size: 30px;
+    margin: 8px 0;
 }
 
-.fiatblock .fiat {
-    width: 100%;
+.fiat {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 2%;
+}
+
+.button-primary {
+    margin: 8px 10pX;
+}
+
+.button-primary:hover {}
+
+
+/* News */
+
+#news header {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-.displayblock {
-    width: 100%;
+.news-btn {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 6px;
-    border: 1px solid blue;
 }
 
-.coins-price-percentage {
-    width: 50%;
-    border: 1px solid black;
+#news a {
+    text-decoration: none;
+    margin: 8px 18px;
 }
 
-.coins-price-percentage .row {
+#news a p {
+    text-align: start;
+    background-color: black;
+    color: white;
+    padding: 2%;
+    line-height: 40px;
+}
+
+#news a p:hover {
+    text-decoration: rgb(200, 221, 200) underline;
+}
+
+
+/* Price Chart */
+
+#coins-price-percentage .container {
     width: 100%;
+}
+
+#header-timer {
     display: flex;
-    flex-wrap: wrap;
+    align-items: end;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
 }
 
-.coins-price-percentage .row div {
-    margin: 10px;
-    border: 1px solid red;
+#timer {
+    color: white;
+    background-color: black;
 }
 
-.coins-tweets-charts {
-    width: 50%;
-    display: flex;
-    flex-wrap: wrap;
+.u-full-width {
+    margin: 5%;
 }
 
-coingecko-coin-compare-chart-widget {
+th,
+td {
+    font-size: 12px;
+    padding: 12px 0;
+}
+
+.green {
+    color: rgb(93, 151, 35);
+}
+
+.red {
+    color: crimson
+}
+
+
+/* Compare Widget */
+
+#widget-charts {
+    padding-bottom: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+#widget-charts header {
+    margin-bottom: 2%;
+}
+
+.coingecko-coin-compare-chart-widget {
     width: 100%;
 }
+
+
+/* all buttons */
