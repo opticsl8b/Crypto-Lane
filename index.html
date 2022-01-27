@@ -1,89 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/5758ce3c54.js" crossorigin="anonymous"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/5758ce3c54.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="skeleton.css" />
     <link rel="stylesheet" href="style.css" />
     <title>Crypto Assets Tracker</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="container">
-        <h1>Crypto Lane<i class="fab fa-bitcoin"></i></h1>
-        <p>A simple tracking app for cryptocurrency assets</p>
+      <h1>Crypto Lane<i class="fab fa-bitcoin"></i></h1>
+      <p>A simple tracking app for cryptocurrency assets</p>
     </header>
 
     <div class="container">
-
-        <div class="rows">
-            <!-- Fiat Btn -->
-            <div class="six columns" id=marketcap-fiat>
-                <div class="marketcap">
-                    <header><i class="fas fa-money-check-alt"></i><span>Total Market Cap</span></header>
-                    <div></div>
-                </div>
-                <div class="btn">
-                    <header><i class="fas fa-money-check-alt"></i><span>Fiat</span></header>
-                    <div class="fiat">
-                        <button class="button-primary" value="aud">AUD</button>
-                        <Button class="button-primary" value="usd">USD</Button>
-                        <button class="button-primary" value="eur">EUR</button>
-                    </div>
-                </div>
+      <div class="rows">
+        <!-- Fiat Btn -->
+        <div class="six columns" id="marketcap-fiat">
+          <div class="marketcap">
+            <header>
+              <i class="fas fa-money-check-alt"></i
+              ><span>Total Market Cap</span>
+            </header>
+            <div></div>
+          </div>
+          <div class="btn">
+            <header>
+              <i class="fas fa-money-check-alt"></i><span>Fiat</span>
+            </header>
+            <div class="fiat">
+              <button class="button-primary" value="aud">AUD</button>
+              <button class="button-primary" value="usd">USD</button>
+              <button class="button-primary" value="eur">EUR</button>
             </div>
-
-            <!-- News -->
-            <div class="six columns" id="news">
-                <header><i class="fas fa-rss-square"></i><span>News Feed</span></header>
-                <div class="news-btn">
-                    <button id="prev" class="button-primary">PREV</button>
-                    <button id="next" class="button-primary">NEXT</button>
-                </div>
-            </div>
-
+          </div>
         </div>
+
+        <!-- News -->
+        <div class="six columns" id="news">
+          <header>
+            <i class="fas fa-rss-square"></i><span>News Feed</span>
+          </header>
+          <div class="news-btn">
+            <button id="prev" class="button-primary">PREV</button>
+            <button id="next" class="button-primary">NEXT</button>
+          </div>
+          <a id="newsLink"><p id="newsTitle"></p></a>
+        </div>
+      </div>
     </div>
     <div class="container">
-        <div class="rows" id="displayblock">
-            <div class="six columns" id="coins-price-percentage">
-                <header class="container">
-                    <div class="rows" id="header-timer">
-                        <div class="eight columns" id="piggy"><i class="fas fa-piggy-bank"></i><span>Current Top 5. </span></div>
-                        <div class="four columns" id="timer">
-                            <div class="timer-text"><i class="fas fa-clock"></i></div>
-                            <div class="sec">20</div>
-                        </div>
-                    </div>
-                </header>
-                <table class="u-full-width">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>coins</th>
-                            <th>Price</th>
-                            <th>24H</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody"></tbody>
-                </table>
+      <div class="rows" id="displayblock">
+        <div class="six columns" id="coins-price-percentage">
+          <header class="container">
+            <div class="rows" id="header-timer">
+              <div class="eight columns" id="piggy">
+                <i class="fas fa-piggy-bank"></i><span>Current Top 5. </span>
+              </div>
+              <div class="four columns" id="timer">
+                <div class="timer-text"><i class="fas fa-clock"></i></div>
+                <div class="sec">20</div>
+              </div>
             </div>
-            <div class="six columns" id="widget-charts">
-                <header><i class="fas fa-chart-line"></i><span>Price Comparison </span></header>
-                <coingecko-coin-compare-chart-widget coin-ids="bitcoin,ethereum,binancecoin,cardano,solana" currency="usd" locale="en"></coingecko-coin-compare-chart-widget>
-            </div>
+          </header>
+          <table class="u-full-width">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>coins</th>
+                <th>Price</th>
+                <th>24H</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
         </div>
+        <div class="six columns" id="widget-charts">
+          <header>
+            <i class="fas fa-chart-line"></i><span>Price Comparison </span>
+          </header>
+          <coingecko-coin-compare-chart-widget
+            coin-ids="bitcoin,ethereum,binancecoin,cardano,solana"
+            currency="usd"
+            locale="en"
+          ></coingecko-coin-compare-chart-widget>
+        </div>
+      </div>
     </div>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://widgets.coingecko.com/coingecko-coin-compare-chart-widget.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
