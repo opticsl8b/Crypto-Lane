@@ -22,11 +22,11 @@ A simple tracking app for cryptocurrency assets</p>
 <h2>Funtions</h2>
 <br>
 
-<h3 align="center">- Initialise-</h3>
+<h3 align="center">- Initialise -</h3>
 <br>
 
 <p align="center">
-<img src="https://i.imgur.com/pK74P1t.gif" title="source: imgur.com" alt="Search & Display"/>
+<img src="https://i.imgur.com/pK74P1t.gif" title="source: imgur.com" alt="Initialise"/>
 </p>
 <br>
 <p align="center">
@@ -105,11 +105,6 @@ Present with next/previos news when click on buttons</p>
 <p align="center">Present with a widget that dives deeper when user clicks on the coins from "Current Top 5." box.</p>
 <br>
 
-<p align="center">
-Future Scope*</p>
-
-<br>
-
 <hr>
 <hr>
 
@@ -138,12 +133,7 @@ Future Scope*</p>
 <li align="center">Button click/hover effect & Box shodow effect</li>
 <br><hr>
 <br>
-<br>
 
-<p align="center">
-Future Scope*</p>
-
-<br>
 
 <hr>
 <hr>
